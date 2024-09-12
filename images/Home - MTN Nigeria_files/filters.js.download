@@ -1,0 +1,181 @@
+(function ($) {
+	var ajax_url = $('#wp-ajax-url').val();
+
+	var newsFilterBtns = document.querySelectorAll('.news-archive-filter');
+	for (var i = 0; i < newsFilterBtns.length; i++) {
+		newsFilterBtns[i].addEventListener('click', newsFilterFunc);
+	}
+
+	function newsFilterFunc() {
+		for (var i = 0; i < newsFilterBtns.length; i++) {
+			newsFilterBtns[i].classList.remove('active');
+		}
+		this.classList.add('active');
+		var wp_nonce = $('#wp-news-nonce').val();
+		const newsBlockEl = $('#news-archive-block');
+		const postType = newsBlockEl.data('posttype');
+		jQuery.ajax({
+			type: 'POST',
+			url: ajax_url,
+			data: {
+				action: 'filter_news_articles',
+				wp_nonce: wp_nonce,
+				newsCat: this.getAttribute('data-termid'),
+				postType: postType
+			},
+			success: function (output) {
+				newsBlockEl.html('');
+				var placeholderEl = document.createElement('textarea');
+				placeholderEl.innerHTML = output;
+				newsBlockEl.html(placeholderEl.value);
+			},
+		});
+	}
+
+	var newsGridBtns = document.querySelectorAll('.news-grid-filter');
+	for (var i = 0; i < newsGridBtns.length; i++) {
+		newsGridBtns[i].addEventListener('click', newsGridFilterFunc);
+	}
+
+	function newsGridFilterFunc() {
+		for (var i = 0; i < newsGridBtns.length; i++) {
+			newsGridBtns[i].classList.remove('active');
+		}
+		this.classList.add('active');
+		const wp_nonce = $('#wp-newsgrid-nonce').val();
+		const newsBlockEl = $('#news-grid-block');
+		const postType = newsBlockEl.data('posttype');
+		jQuery.ajax({
+			type: 'POST',
+			url: ajax_url,
+			data: {
+				action: 'filter_news_grid',
+				wp_nonce: wp_nonce,
+				newsCat: this.getAttribute('data-termid'),
+				postType: postType
+			},
+			success: function (output) {
+				newsBlockEl.html('');
+				var placeholderEl = document.createElement('textarea');
+				placeholderEl.innerHTML = output;
+				newsBlockEl.html(placeholderEl.value);
+			},
+		});
+	}
+
+	var newsArchiveBtns = document.querySelectorAll('.news-archive-btn');
+	var timer;
+
+	for (var i = 0; i < newsArchiveBtns.length; i++) {
+		newsArchiveBtns[i].addEventListener('click', activeNewsBtnFunc);
+	}
+
+	function addPagination() {
+		var pageBtns = document.querySelectorAll('.prev-btn');
+		for (var i = 0; i < pageBtns.length; i++) {
+			pageBtns[i].addEventListener('click', currentPageFunc);
+		}
+	}
+
+	function activeNewsBtnFunc() {
+		for (var i = 0; i < newsArchiveBtns.length; i++) {
+			newsArchiveBtns[i].classList.remove('active');
+		}
+		this.classList.add('active');
+		resetPageNum();
+		filterNews();
+	}
+
+	function currentPageFunc() {
+		var currentPage = document.getElementsByClassName('current');
+		if (currentPage.length > 0) {
+			currentPage[0].className = currentPage[0].className.replace(' current', '');
+		}
+		this.classList.add('current');
+		filterNews();
+	}
+
+	function resetPageNum() {
+		var currentPage = document.getElementsByClassName('current');
+		if (currentPage.length > 0) {
+			currentPage[0].className = currentPage[0].className.replace(' current', '');
+		}
+		$('#page_1').addClass('current');
+	}
+
+	jQuery(function () {
+		jQuery('#search-text').keyup(function () {
+			clearTimeout(timer);
+			timer = setTimeout(function () {
+				resetPageNum();
+				filterNews();
+			}, 200);
+		});
+	});
+
+
+	var news_archive_nonce = jQuery('#wp-archive-nonce').val();
+	function filterNews() {
+		var searchWord = jQuery('#search-text').val();
+		var categoryId = jQuery('.news-archive-btn').closest('.active').data('termid');
+		var pageNum = jQuery('.prev-btn').closest('.current').attr('id');
+		const newsBlockEl = $('#mini-news-container');
+		const postType = newsBlockEl.data('posttype');
+		if (undefined !== pageNum) {
+			var pageNumArray = pageNum.split('_');
+			pageNum = pageNumArray[1];
+		} else {
+			pageNum = 1;
+		}
+		jQuery.ajax({
+			type: 'POST',
+			url: ajax_url,
+			dataType: 'json',
+			data: {
+				action: 'filter_all_news',
+				news_archive_nonce: news_archive_nonce,
+				search: searchWord,
+				newsCat: categoryId,
+				paged: pageNum,
+				postType: postType,
+			},
+			success: function (response) {
+				jQuery('#main-news-container').hide();
+				if (undefined !== response.content) {
+					var placeholderEl = document.createElement('textarea');
+					placeholderEl.innerHTML = response.content;
+					jQuery('#mini-news-container').html(placeholderEl.value);
+					jQuery('#max-pages').val(response.max_num_pages);
+					var pageList = '';
+					outOfRange = false;
+					for (i = 1; i <= response.max_num_pages; i++) {
+						if (i <= 2 || i >= response.max_num_pages - 2 || Math.abs(i - response.paged) <= 2) {
+							// page number should be echoed so do as you did before
+							outOfRange = false;
+
+							if (response.paged === i) pageList += '<li><button id="page_' + i + '" class="prev-btn current" >' + i + '</button></li>';
+							else pageList += '<li><button id="page_' + i + '" class="prev-btn" >' + i + '</button></li>';
+						} else {
+							// we are out of range! if not already out of range, echo ellipsis
+							if (!outOfRange) {
+								pageList += '<li class="ellipse">...</li>';
+							}
+							outOfRange = true;
+						}
+					}
+					jQuery('#pagination-list').html(pageList);
+					addPagination();
+				} else {
+					jQuery('#mini-news-container').html('<h4>No related news stories found!</h4>');
+					jQuery('#pagination-list').html('');
+				}
+			},
+			error: function (error) {
+				console.log(error);
+			},
+		});
+	}
+
+
+
+})(jQuery);

@@ -1,0 +1,74 @@
+jQuery(document).ready(function($) {
+  // Help show more filter
+  $('header button.search').click((e) => {
+    const searchBoxEl = $('.site-search--container ');
+    searchBoxEl.show('100');
+  })
+
+  $('.search__close').click((e) => {
+    e.preventDefault();
+    const searchBoxEl = $('.site-search--container ');
+    searchBoxEl.hide('100');
+  });
+
+  // Help show more filter
+  $('.help-archive--show-more').click((e) => {
+    e.preventDefault();
+    const minimumVisibleCards = 6;
+    const el = $(e.currentTarget);
+    const countCards = el.data('countcards');
+    let visibleCards = el.data('visiblecards') ;
+    if (!el.hasClass('__show-less')) {
+      visibleCards += 3;
+      if (countCards <= visibleCards) {
+        visibleCards = countCards;
+        el.addClass('__show-less');
+        $('.help-category-card').show(250);
+      }
+    } else if (el.hasClass('__show-less')) {
+      console.log('show less');
+      visibleCards = minimumVisibleCards;
+      cardsToHide = countCards - minimumVisibleCards + 1;
+      el.removeClass('__show-less');
+      $('.help-category-card:nth-last-child(-n+' + cardsToHide + ')').hide(250);
+    }
+    $('.help-category-card:nth-child(-n+' + visibleCards + ')').show(250);
+    el.data('visiblecards', visibleCards);
+  })
+
+  // Help archive page search
+  $('input[name="post_type_search_term"]').keyup( (e) => {
+    const el = $(e.currentTarget);
+    e.preventDefault();
+    var searchTerm = el.val();
+    var postType = $('input[name="post_type"]').val();
+    if ( searchTerm ) {
+      $.get( '/', { s: searchTerm, post_type: postType }, function( data ){
+        $('.help-search--results').html($(data));
+      });
+      $('.help-search--container').addClass('__show-results');
+    }
+  } )
+  $('.help-search--results__close').click( (e) => {
+    $('.help-search--container').removeClass('__show-results');
+  } )
+
+  if (typeof searchResultsFilter !== 'undefined') {
+
+    const searchFilterEl = $('.search-category-filter');
+    console.log('searchResultsFilter', searchResultsFilter);
+    console.log('searchResultsFilter.searchResultsCategories', searchResultsFilter.searchResultsCategories);
+    $.each( searchResultsFilter.searchResultsCategories, (key, value) => {
+      const optionHTML = '<option value="' + value + '">' + value + '</option>';
+      searchFilterEl.append( optionHTML );
+    });
+  }
+
+  $('.search-category-filter').on('change', (e) => {
+    const searchFilterEl = $('.search-category-filter');
+    $('article').show(150);
+    if (searchFilterEl.val() != 'all')
+    $('article:not([data-posttype="' + searchFilterEl.val() + '"]').hide(150);
+  });
+
+});

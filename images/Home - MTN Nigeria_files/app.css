@@ -1,0 +1,17 @@
+.welcome-page .header .logo img {
+  width: auto;
+}
+
+.universals.past,
+.response-choices.past {
+  display: none !important;
+}
+.bottom_bar img.attach_file-btn {
+  filter: unset !important;
+}
+.file_message .size::before {
+  content: "(";
+}
+.file_message .size::after {
+  content: ")";
+}

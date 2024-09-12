@@ -1,0 +1,166 @@
+	(function ($) {
+		// #EMTODO: Move to global site JS file
+
+		// DEALS CPT SINGLE - Bundle sort
+		$('.bundles-sort-order').on('change', (event) => {
+
+			const sortResults = [...$('.bundle-items .bundled-item')].sort((a, b) => {
+				const contentA = ($(a).data('price'));
+				const contentB = ($(b).data('price'));
+				if (event.currentTarget.value == 'desc')
+					return (contentA > contentB) ? -1 : (contentA < contentB) ? 1 : 0;
+				return (contentA < contentB) ? -1 : (contentA > contentB) ? 1 : 0;
+			});
+
+			$('.bundle-items').html(sortResults);
+
+			$('.bundled-item').on('click', function (event) {
+				bundleSelect($(this));
+			});
+		});
+
+		if((document.getElementById('bundle-yes'))){
+			document.getElementById('bundle-yes').checked = true;
+
+			document.getElementById('bundle-yes').onclick = function () {
+				document.getElementById('bundle-yes').checked = true;
+				document.getElementById('bundle-no').checked = false;
+				document.getElementById('bundle-display').classList.remove("hide-bundle");
+			}
+			document.getElementById('bundle-no').onclick = function () {
+				document.getElementById('bundle-no').checked = true;
+				document.getElementById('bundle-yes').checked = false;
+				document.getElementById('bundle-display').classList.add("hide-bundle");
+					$('.bundled-item').removeClass('selected');
+					$('.bundled-item').find('.bundle-selector').prop('checked',false);
+					$('.extra-bundle').addClass('no-bundle');
+					$('.bundle-information').addClass('no-bundle');
+					let price = 0;
+					let deal_price = $('.main-deal').find('.footer-deal-price').html();
+					let total = parseFloat(price) + parseFloat(deal_price);
+					$('.deal-footer-total').find('.footer-total').html(total);
+
+
+			}
+		}
+
+		let bundleSelect = function($element) {
+			$('.bundled-item').removeClass('selected');
+			$('.bundled-item').find('.bundle-selector').prop('checked',false);
+			$('.extra-bundle').addClass('no-bundle');
+			$('.bundle-information').addClass('no-bundle');
+			let bundlePrice = $element.data('price');
+			let deal_price = $('.main-deal').find('.footer-deal-price').html();
+
+			if ($element.find('.bundle-selector').is(':checked')) {
+				$element.find('.bundle-selector').prop('checked', false);
+				$element.removeClass('selected');
+
+			} else {
+				$element.siblings('.selected').removeClass('selected');
+				$element.addClass('selected');
+				$element.find('.bundle-selector').prop('checked', true);
+
+				$('.extra-bundle').find('.footer-bundle-price').html(bundlePrice);
+				$('.extra-bundle').removeClass('no-bundle');
+				item_name = $element.find('.item-title').html();
+				deal_title = $('.product-col').find('.deal-page-title').html();
+
+				$('.bundle-information').removeClass('no-bundle');
+				$('.bundle-information').find('.deal-footer-info-details').html(item_name);
+				$('.bundle-information').find('.deal-footer-main-details').html(deal_title);
+
+			}
+			let total = parseFloat(deal_price) + parseFloat(bundlePrice);
+			$('.deal-footer-total').find('.footer-total').html(total);
+		}
+
+		$('.bundled-item').on('click', function (event) {
+			bundleSelect($(this));
+		});
+
+// DEALS ARCHIVE Filter
+	$('.deals-archive--filter__toggle').on('click', function(event) {
+		$(this).toggleClass('open');
+		$('.deals-archive--filter__container').toggleClass('open');
+	});
+
+	$('.deals-archive--filter__container input[type="radio"], .deals-archive--filter__container input[type="checkbox"]').on('change' , function(event) {
+		const speedShowHide = 150;
+		const $archiveDealsCards = $('.deals-archive--content ._card-deal');
+		const filterName = $(this).attr("name");
+		const filterValue = $(this).val();
+
+		$archiveDealsCards.removeClass('hide');
+		console.log(filterName,'filterName');
+		console.log(filterValue,'filterValue');
+
+		switch (filterName) {
+			case  'filter-promotions':
+				if (filterValue == 'promotions-only') {
+					$archiveDealsCards.filter('[data-onpromotion!=1]').addClass('hide');
+				}
+		}
+
+		$archiveDealsCards.show(speedShowHide);
+		$archiveDealsCards.filter('.hide').hide(speedShowHide);
+	});
+
+
+	$('.deals-archive--filter a.disabled').click( (e) => e.preventDefault());
+
+	// DEALS && BUSINESS SOLUTIONS - CPT ARCHIVE Sort
+
+
+	// BUSINESS SOLUTIONS CPT ARCHIVE - Sort
+	$('.deals-archive--sort').on('change', (event) => {
+		const sortResults = [...$('.deals-archive--content ._card-deal')].sort((a, b) => {
+			const priceA = ($(a).data('price'));
+			const priceB = ($(b).data('price'));
+			const defaultOrderA = ($(a).data('default-order'));
+			const defaultOrderB = ($(b).data('default-order'));
+			const titleA = ($(a).find('._card-deal__title').text());
+			const titleB = ($(b).find('._card-deal__title').text());
+			switch (event.currentTarget.value ) {
+				case 'desc':
+					return (priceA > priceB) ? -1 : (priceA < priceB) ? 1 : 0;
+					break;
+				case 'asc':
+					return (priceA < priceB) ? -1 : (priceA > priceB) ? 1 : 0;
+					break;
+				case 'name_desc':
+					return (titleA > titleB) ? -1 : (titleA < titleB) ? 1 : 0;
+					break;
+				case 'name_asc':
+					return (titleA < titleB) ? -1 : (titleA > titleB) ? 1 : 0;
+					break;
+				default:
+					return (defaultOrderA > defaultOrderB) ? -1 : (defaultOrderA < defaultOrderB) ? 1 : 0;
+			}
+		});
+
+		$('.deals-archive--content').html(sortResults);
+	});
+
+	$('.deals-archive--sort:not(.__business-solutions--sort)').val('asc').change();
+	$('.__business-solutions--sort').val('default').change();
+
+
+
+
+	$('.single-product-section-card').addClass('products-filter__show');
+	$('.deal-filter-btn').on('click',function(e){
+	   let selectedDealType =  $('.active').val();
+	   $('.products-block-slider').slick('setPosition');
+	   console.log(selectedDealType);
+	   
+	if(selectedDealType  == 'all'){
+	   $('.single-product-section-card').show(100).addClass('products-filter__show');
+	}else{
+	   $('.single-product-section-card').hide(100).removeClass('products-filter__show');
+	   $('.single-product-section-card[data-prodterm="'+selectedDealType+'"]').show(100).addClass('products-filter__show');
+	}
+	});
+
+
+})(jQuery);

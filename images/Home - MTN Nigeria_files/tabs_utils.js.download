@@ -1,0 +1,78 @@
+(function ($) {
+function openTab(evt, tabLocation, tabName = false) {
+	var i, tabContent;
+	tabButtons = document.getElementsByClassName('tab-btn');
+	tabContent = document.getElementsByClassName('tab-content');
+
+	if (tabLocation) {
+		let elem = document.getElementById(tabLocation);
+		if (elem) {
+			for (i = 0; i < tabContent.length; i++) {
+				tabContent[i].style.display = 'none';
+			}
+
+			for (i = 0; i < tabButtons.length; i++) {
+				tabButtons[i].className = tabButtons[i].className.replace('active', '');
+			}
+
+			elem.style.display = 'block';
+			if (evt) {
+				evt.currentTarget.className += ' active';
+			}
+		}
+	} else if (tabName) {
+		for (i = 0; i < tabButtons.length; i++) {
+			const tab = tabButtons[i];
+			let currentTabName = tab.dataset.tabName;
+			if (currentTabName && currentTabName.toLowerCase() === tabName.toLowerCase()) {
+				tab.click();
+			}
+		}
+	}
+}
+
+function getUrlParameter(name) {
+	name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+	var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+	var results = regex.exec(location.search);
+	return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+}
+
+window.onload = function () {
+	// tab categories
+	var category_content = $('#mtn-contact-tabs');
+	if (category_content && category_content.children.length > 0) {
+		$('#mtn-contact-tabs > div:first').show();
+	}
+};
+
+setActiveTab();
+function setActiveTab() {
+	var contentTabs = document.querySelectorAll('.tabcontent');
+	var activeTab = document.getElementsByClassName('active');
+	var tablinks = document.getElementsByClassName('tablinks');
+	var tabIdArray, tabId;
+	for (var i = 0; i < contentTabs.length; i++) {
+		tabIdArray = contentTabs[i].id.split('-');
+		tabId = tabIdArray[1];
+		if (activeTab.length > 0 && tabId === activeTab[0].id) {
+			document.getElementById('tab-' + activeTab[0].id).classList.add('show');
+		}
+	}
+}
+
+function openSection(evt, leadershipType) {
+	var i, tabcontent, tablinks;
+
+	tabcontent = document.getElementsByClassName('tabcontent');
+	for (i = 0; i < tabcontent.length; i++) {
+		tabcontent[i].classList.remove('show');
+	}
+	tablinks = document.getElementsByClassName('tablinks');
+	for (i = 0; i < tablinks.length; i++) {
+		tablinks[i].className = tablinks[i].className.replace(' active', '');
+	}
+	document.getElementById(leadershipType).classList.add('show');
+	evt.currentTarget.className += ' active';
+}
+})(jQuery);

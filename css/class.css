@@ -1,0 +1,68 @@
+body{
+    margin: 0;
+    padding: 0;
+    background-color: wheat;
+}
+#Grandpa{
+    background-color: red;
+    display: flex;
+    justify-content: center;
+    column-gap: 40px;
+    align-items: center;
+}
+#son2{
+    display: flex;
+    column-gap: 10px;
+    flex-direction: column;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+#kid1{
+    display: flex;
+    column-gap: 10px;
+}
+#airtime{
+    color: red;
+    border: none;
+    background-color: white;
+    border-radius: 5px;
+    height: 35px;
+}
+input{
+    width: 20rem;
+    border: none;
+    border-radius: 8px;
+}
+#kid2{
+    display: flex;
+    column-gap: 15px;
+}
+#lilbro{
+    display: flex;
+    
+}
+#section1{
+    background-color: blue;
+    display: flex;
+    justify-content: space-around;
+}
+.second{
+    display: flex;
+    column-gap: 25px;
+    align-items: center;
+}
+#but{
+    background-color: darkblue;
+    color: white;
+    border-radius: 10px;
+    cursor: pointer;
+    border: none;
+    height: 25%;
+    font-family: fira 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+}
+#section2{
+    background-color: white;
+    padding-left: 39px;
+}

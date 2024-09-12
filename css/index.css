@@ -1,0 +1,53 @@
+h1{
+
+    color: blue;
+    font-size: 23px;
+    
+
+}
+body{
+
+/* background-color: red; */
+background-image: linear-gradient(to left, rgb(218, 146, 146) ,rgb(168, 168, 228),rgb(126, 164, 126));
+background-repeat: no-repeat;
+background-attachment: fixed;
+margin: 0;
+padding: 0;
+
+}
+
+p{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+#second-h1{
+
+    color: red;
+
+}
+#container{
+    width: 600px;
+    height: 600px;
+    border: 2px solid rgb(0, 6, 128);
+
+}
+#div-one{
+
+    width: 250px;
+    height: 250px;
+    border: 2px solid green;
+    /* margin-top: 40px;
+    margin-left: 20px;
+    margin-bottom: 60px;
+    margin-right: 60px; */
+    /* margin: 40px 60px 40px 60px; */
+    /* margin: 40px 60px; */
+    margin: 40px auto 10px;
+  
+}
+#div-two{
+
+    width: 250px;
+    height: 250px;
+    border: 2px solid red;
+  
+}

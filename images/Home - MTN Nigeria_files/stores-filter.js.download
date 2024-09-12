@@ -1,0 +1,65 @@
+(function ($) {
+
+   if (typeof storeLocatorVars !== 'undefined') {
+
+      if(storeLocatorVars.currentTerm){
+         $('.province-selector').val(storeLocatorVars.currentTerm);
+      } else{
+         $('.province-selector').val('all');
+      };
+
+      $('.province-selector').on('change',function(e){
+
+         let provinceSlug =  $( '.province-selector' ).val();
+         if(provinceSlug == 'all'){
+         window.location.replace(storeLocatorVars.archiveUrl);
+         }
+         else{
+         window.location.replace(storeLocatorVars.taxonomyArchive + provinceSlug + "/");
+         }
+      });
+   }
+
+   $('.single-store').addClass('town-filter__show');
+   $('.city-selector').on('change',function(e){
+      $('.store-search-text').val('');
+      let selectedCity =  $('.city-selector').val();//get name of selected city
+   // let cityToShow = $('.single-store').data();
+   if(selectedCity == 'alltowns'){
+      $('.single-store').show(100).addClass('town-filter__show');
+   }else{
+      $('.single-store').hide(100).removeClass('town-filter__show');//hide all stores
+      $('.single-store[data-town="'+selectedCity+'"]').show(100).addClass('town-filter__show');
+   }
+   });
+
+   $('.store-search-clear').hide();
+   $('.store-search-text').keyup( function( event ) {
+      $('.store-search-clear').show();
+      const searchText = event.currentTarget.value;
+      if(searchText == ''){
+         $('.store-search-clear').hide();
+      }
+      let = storeElements = $('.single-store.town-filter__show');
+
+      storeElements.each(function () {
+
+         const $thisStore = $(this);
+         $thisStore.hide();
+         $thisStore.children().each(function(){
+            if ($(this).text().toLowerCase().includes(searchText.toLowerCase())) {
+               $thisStore.show()
+
+            }
+         })
+
+      });
+   });
+
+   $('.store-search-clear').on('click',function(e){
+      $('.store-search-text').val('');
+      $('.store-search-clear').hide();
+      $('.single-store.town-filter__show').show(100);
+   });
+
+})(jQuery);

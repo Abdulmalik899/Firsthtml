@@ -1,0 +1,152 @@
+body{
+    padding: 0;
+    margin: 0;
+}
+#section1{
+    background-color: white;
+    position: sticky;
+    top: 0px;
+    z-index: 44;
+}
+.container1{
+    display: flex;
+    
+    width: 95%;
+    margin: 10px auto;
+}
+.container1-child{
+    display: flex;
+    column-gap: 35px;
+    align-items: center;
+}
+#section1-img{
+    align-items: end;
+}
+#section2{
+   background: url(../images/home01\ \(1\).jpg);
+   background-size: contain;
+   background-repeat: no-repeat;
+   height: 100vh;
+   
+}
+.container2{
+    display: flex;
+    width: 60%;
+    align-items: center;
+    
+    
+}
+#section2-child{
+    display: flex;
+    align-items: flex-start;
+    flex-basis: 90%;
+    flex-direction: column;
+    width: 100%;
+    margin: 0 auto;
+    padding-top: 35px;
+}
+.links{
+    display: flex;
+    width: 25%;
+    column-gap: 10px;
+}
+#section3{
+    width: 100%;
+    padding: 0 auto;
+}
+.container3{
+    padding: 30px 0px 40px;
+    position: relative;
+    overflow: scroll;
+    align-items: center ;
+    position: relative;
+    height: 100vh;
+    display: flex;
+   
+}
+.slide{
+    width: 100vw;
+    height: 70%;
+    background-repeat: no-repeat;
+    position: relative;
+    align-items: end;
+    display: flex;
+
+    
+}
+#first{
+    padding: 28px 11px 0px 16px;
+    height: 45%;
+    background: rgb(248, 251, 255);
+    border-radius: 16px;
+    width: 12.6vw;
+   
+    
+}
+#svg{
+    width: 30px;
+    height: 30px;
+    font-size: 24px;
+    position: relative;
+
+}
+.title1{
+    font-size: 0.95vw;
+    line-height: 1.04vw;
+    font-weight: 700;
+    margin: 4.17vw 0px 0.1vw;
+    color: rgb(33, 15, 96);
+    width: 20vw;
+}
+.p1{
+    font-size: 0.65vw;
+    line-height: 1.13vw;
+    font-weight: 400;
+    color: rgb(29, 201, 155);
+    width: 12vw;
+}
+.image{
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 9;
+}
+#section4{
+    background-color: white;
+   
+}
+.container4-child{
+    background: rgb(29, 201, 155);
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+}
+.container4-child2{
+    background-color: white;
+    display: flex;
+    align-items: center;
+}
+.container4-child3{
+    background: rgb(29, 201, 155);
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+}
+.container4-child4{
+    background-color: rgb(251, 252, 255);
+    display: flex;
+    align-items: center;
+    flex-direction: row-reverse;
+}
+.link{
+    display: flex;
+    width: 40%;
+    border-radius: 7px;
+    column-gap: 15px;
+}
+.container5{
+    overflow: scroll;
+}
+

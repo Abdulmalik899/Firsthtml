@@ -1,0 +1,659 @@
+(function ($) {
+  $(".info-slider").slick({
+    centerMode: false,
+    autoplay: false,
+    arrows: true,
+    centerPadding: "0px",
+    slidesToShow: 4,
+    slidesToScroll: 4,
+    draggable: true,
+    speed: 1100,
+    infinite: false,
+    dots: true,
+    //appendDots: $('.info-slider-dots'),
+
+    responsive: [
+      {
+        breakpoint: 1030,
+        settings: {
+          arrows: true,
+          centerMode: false,
+          autoplay: true,
+          centerPadding: "0px",
+          slidesToShow: 3,
+          slidesToScroll: 2,
+          draggable: true,
+          speed: 800,
+          infinite: false,
+        },
+      },
+
+      {
+        breakpoint: 880,
+        settings: {
+          arrows: false,
+          centerMode: false,
+          autoplay: true,
+          centerPadding: "0px",
+          slidesToShow: 2,
+          slidesToScroll: 2,
+          draggable: true,
+          speed: 800,
+          infinite: false,
+        },
+      },
+
+      {
+        breakpoint: 640,
+        settings: {
+          arrows: false,
+          centerMode: true,
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          draggable: true,
+          //dots: true,
+          infinite: false,
+        },
+      },
+    ],
+  });
+
+  $(".links-slider").slick({
+    centerMode: false,
+    autoplay: false,
+    arrows: true,
+    centerPadding: "0px",
+    slidesToShow: 3,
+    slidesToScroll: 3,
+    draggable: true,
+    speed: 1100,
+    infinite: false,
+    dots: true,
+    //appendDots: $('.links-slider-dots'),
+
+    responsive: [
+      {
+        breakpoint: 880,
+        settings: {
+          arrows: false,
+          centerMode: false,
+          autoplay: true,
+          centerPadding: "0px",
+          slidesToScroll: 1,
+          draggable: true,
+          speed: 800,
+          infinite: false,
+          slidesToShow: 2,
+        },
+      },
+
+      {
+        breakpoint: 640,
+        settings: {
+          arrows: false,
+          centerMode: true,
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          //dots: true,
+        },
+      },
+    ],
+  });
+
+  $(".long-info-slider").slick({
+    centerMode: false,
+    autoplay: false,
+    arrows: true,
+    centerPadding: "0px",
+    slidesToShow: 3,
+    slidesToScroll: 3,
+    draggable: true,
+    speed: 1100,
+    infinite: false,
+    dots: true,
+    //appendDots: $('.links-slider-dots'),
+
+    responsive: [
+      {
+        breakpoint: 980,
+        settings: {
+          arrows: true,
+          centerMode: false,
+          autoplay: true,
+          centerPadding: "0px",
+          slidesToScroll: 1,
+          draggable: true,
+          speed: 800,
+          infinite: false,
+          slidesToShow: 2,
+        },
+      },
+
+      {
+        breakpoint: 768,
+        settings: {
+          arrows: false,
+          centerMode: false,
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          //dots: true,
+        },
+      },
+    ],
+  });
+
+  $(".displayGrid").slick({
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    centerPadding: "0px",
+    mobileFirst: true,
+    arrows: false,
+    dots: true,
+    centerMode: true,
+    draggable: true,
+    responsive: [
+      {
+        breakpoint: 860,
+        settings: "unslick",
+      },
+    ],
+  });
+
+  $(".displayCarousel").slick({
+    slidesToShow: 3,
+    slidesToScroll: 3,
+    centerPadding: "0px",
+    centerMode: true,
+    arrows: false,
+    dots: true,
+    draggable: true,
+    responsive: [
+      {
+        breakpoint: 860,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+        },
+      },
+
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        },
+      },
+    ],
+  });
+
+  $(".info-carousel-slider").slick({
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    centerPadding: "0px",
+    //mobileFirst: true,
+    arrows: false,
+    dots: true,
+    centerMode: false,
+    draggable: true,
+    //appendDots: $('.info-carousel-dots'),
+  });
+
+  $(".banner-slider").slick({
+    fade: true,
+    speed: 3000,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    centerPadding: "0px",
+    autoplay: true,
+    autoplaySpeed: 6000,
+    //mobileFirst: true,
+    arrows: false,
+    dots: true,
+    centerMode: false,
+    draggable: true,
+    appendDots: $(".slideshow-dots"),
+  });
+
+  $(".slider-404").slick({
+    fade: true,
+    speed: 3000,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    centerPadding: "0px",
+    autoplay: true,
+    autoplaySpeed: 6000,
+    //mobileFirst: true,
+    arrows: false,
+    dots: true,
+    centerMode: false,
+    draggable: true,
+    appendDots: $(".dots-404"),
+  });
+
+  $(".news-grid-container").slick({
+    fade: true,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    centerPadding: "0px",
+    mobileFirst: true,
+    arrows: false,
+    speed: 800,
+    dots: true,
+    centerMode: true,
+    draggable: true,
+    responsive: [
+      {
+        breakpoint: 860,
+        settings: "unslick",
+      },
+    ],
+  });
+
+  $(".tweet-container").slick({
+    centerMode: false,
+    autoplay: true,
+    arrows: true,
+    centerPadding: "0px",
+    slidesToShow: 3,
+    slidesToScroll: 1,
+    draggable: true,
+    speed: 1100,
+    infinite: true,
+    dots: true,
+
+    responsive: [
+      {
+        breakpoint: 970,
+        settings: {
+          arrows: false,
+          centerMode: true,
+          autoplay: true,
+          centerPadding: "0px",
+          slidesToScroll: 1,
+          draggable: true,
+          speed: 800,
+          infinite: true,
+          slidesToShow: 2,
+        },
+      },
+
+      {
+        breakpoint: 768,
+        settings: {
+          arrows: false,
+          centerMode: true,
+          slidesToShow: 1,
+          centerPadding: "0px",
+          mobileFirst: true,
+          slidesToScroll: 1,
+          dots: true,
+        },
+      },
+    ],
+  });
+
+  $(".promotion-carousel").slick({
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    fade: false,
+    //centerPadding: '0px',
+    arrows: false,
+    speed: 800,
+    dots: true,
+    centerMode: false,
+    draggable: true,
+    responsive: [
+      {
+        breakpoint: 860,
+        settings: "unslick",
+      },
+    ],
+  });
+
+  $(".bundle-items").slick({
+    fade: true,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    centerPadding: "0px",
+    mobileFirst: true,
+    arrows: false,
+    speed: 800,
+    dots: true,
+    centerMode: true,
+    draggable: true,
+    responsive: [
+      {
+        breakpoint: 860,
+        settings: "unslick",
+      },
+    ],
+  });
+
+  $(".image-slides").slick({
+    slidesToShow: 1,
+    centerMode: true,
+    slidesToScroll: 1,
+    arrows: false,
+    fade: true,
+    mobileFirst: true,
+    asNavFor: ".image-slides-nav",
+  });
+  $(".image-slides-nav").slick({
+    slidesToShow: 4,
+    centerMode: false,
+    slidesToScroll: 1,
+    asNavFor: ".image-slides",
+    //dots: true,
+    mobileFirst: true,
+    focusOnSelect: true,
+  });
+
+  $(".image-carousel-slider").slick({
+    slidesToShow: 1,
+    centerMode: true,
+    draggable: true,
+    slidesToScroll: 1,
+    arrows: true,
+    speed: 800,
+    dots: true,
+    centerPadding: "0px",
+
+    responsive: [
+      {
+        breakpoint: 880,
+        settings: {
+          arrows: false,
+          centerMode: true,
+          centerPadding: "0px",
+        },
+      },
+    ],
+  });
+  $(".icon-card-carousel").slick({
+    autoplay: true,
+    centerPadding: "0px",
+    slidesToShow: 3,
+    slidesToScroll: 1,
+    centerMode: false,
+    infinite: false,
+    arrows: false,
+    dots: true,
+    draggable: true,
+    responsive: [
+      {
+        breakpoint: 1080,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+          dots: true,
+        },
+      },
+
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          dots: true,
+          centerMode: true,
+        },
+      },
+    ],
+  });
+
+  $(".information-carousel-slider").slick({
+    centerMode: false,
+    autoplay: true,
+    arrows: false,
+    centerPadding: "0px",
+    slidesToShow: 4,
+    slidesToScroll: 1,
+    draggable: true,
+    speed: 1100,
+    infinite: false,
+    dots: true,
+    //appendDots: $('.info-slider-dots'),
+
+    responsive: [
+      {
+        breakpoint: 1030,
+        settings: {
+          arrows: false,
+          centerMode: false,
+          autoplay: true,
+          centerPadding: "0px",
+          slidesToShow: 3,
+          slidesToScroll: 1,
+          draggable: true,
+          speed: 800,
+          infinite: false,
+          dots: true,
+        },
+      },
+
+      {
+        breakpoint: 880,
+        settings: {
+          arrows: false,
+          centerMode: false,
+          autoplay: true,
+          centerPadding: "0px",
+          slidesToShow: 2,
+          slidesToScroll: 1,
+          draggable: true,
+          speed: 800,
+          infinite: false,
+          dots: true,
+        },
+      },
+
+      {
+        breakpoint: 640,
+        settings: {
+          arrows: false,
+          centerMode: true,
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          draggable: true,
+          infinite: false,
+          dots: true,
+        },
+      },
+    ],
+  });
+
+  $(".careers-grid-slider").slick({
+    centerMode: false,
+    autoplay: false,
+    arrows: false,
+    centerPadding: "0px",
+    slidesToShow: 3,
+    slidesToScroll: 1,
+    draggable: true,
+    speed: 1100,
+    infinite: false,
+    dots: false,
+    //appendDots: $('.info-slider-dots'),
+
+    responsive: [
+      {
+        breakpoint: 880,
+        settings: {
+          arrows: false,
+          centerMode: false,
+          autoplay: true,
+          centerPadding: "0px",
+          slidesToShow: 2,
+          slidesToScroll: 1,
+          draggable: true,
+          speed: 800,
+          infinite: false,
+          dots: true,
+        },
+      },
+
+      {
+        breakpoint: 640,
+        settings: {
+          arrows: false,
+          centerMode: true,
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          draggable: true,
+          infinite: false,
+          dots: true,
+        },
+      },
+    ],
+  });
+
+  $(".products-block-slider").slick({
+    centerMode: false,
+    autoplay: false,
+    arrows: false,
+    centerPadding: "0px",
+    slidesToShow: 4,
+    slidesToScroll: 4,
+    draggable: true,
+    speed: 1100,
+    infinite: false,
+    dots: true,
+    //appendDots: $('.info-slider-dots'),
+
+    responsive: [
+      {
+        breakpoint: 1030,
+        settings: {
+          arrows: false,
+          centerMode: false,
+          autoplay: true,
+          centerPadding: "0px",
+          slidesToShow: 3,
+          slidesToScroll: 2,
+          draggable: true,
+          speed: 800,
+          infinite: false,
+        },
+      },
+
+      {
+        breakpoint: 880,
+        settings: {
+          arrows: false,
+          centerMode: false,
+          autoplay: true,
+          centerPadding: "0px",
+          slidesToShow: 2,
+          slidesToScroll: 2,
+          draggable: true,
+          speed: 800,
+          infinite: false,
+        },
+      },
+
+      {
+        breakpoint: 640,
+        settings: {
+          arrows: false,
+          centerMode: true,
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          draggable: true,
+          //dots: true,
+          infinite: false,
+        },
+      },
+    ],
+  });
+
+  $(".testimonial-carousel-slider").slick({
+    centerPadding: "0px",
+    slidesToShow: 3,
+    slidesToScroll: 1,
+    centerMode: false,
+    infinite: false,
+    arrows: false,
+    dots: true,
+    draggable: true,
+    responsive: [
+      {
+        breakpoint: 1080,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+          dots: true,
+        },
+      },
+
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          dots: true,
+          centerMode: true,
+        },
+      },
+    ],
+  });
+  $(".profile-carousel-slider").slick({
+    centerPadding: "0px",
+    slidesToShow: 4,
+    slidesToScroll: 1,
+    centerMode: false,
+    infinite: false,
+    arrows: false,
+    dots: true,
+    draggable: true,
+    responsive: [
+      {
+        breakpoint: 1080,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+          dots: true,
+        },
+      },
+
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          dots: true,
+          centerMode: true,
+        },
+      },
+    ],
+  });
+  $(".video-carousel-slider").slick({
+    centerPadding: "0px",
+    slidesToShow: 3,
+    slidesToScroll: 1,
+    centerMode: false,
+    infinite: false,
+    arrows: false,
+    dots: true,
+    draggable: true,
+    responsive: [
+      {
+        breakpoint: 1080,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+          dots: true,
+        },
+      },
+
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          dots: true,
+          centerMode: true,
+        },
+      },
+    ],
+  });
+})(jQuery);

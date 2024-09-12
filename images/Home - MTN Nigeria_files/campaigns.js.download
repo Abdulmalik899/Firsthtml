@@ -1,0 +1,704 @@
+ORA.personalizationModule.prototype.personalizationCallback({
+  "campaigns": {
+    "ebc6f521-bc2d-46f2-ac4e-8c4a8da90d88": {
+  "name": "Use Case Related Content",
+  "blocks": {
+    "C3": {
+  "name": "2Push Clicked Recos into Cookie",
+  "masks": {
+  "include" : [
+    "*?utmcampaign=reco*"
+  ],
+  "exclude" : [
+  ]
+},
+  "css": "",
+  "html": "",
+  "js": function (info, data) {
+  var recosClicked = '';
+if(getCookie('reco_clicked')){
+  recosClicked = getCookie('reco_clicked');
+}
+
+var a = JSON.parse(document.querySelector( "script[data-drupal-selector*='drupal-settings-json']" ).innerText);
+a = a.selfservice.subscriptionId;
+
+if(recosClicked == ''){
+  recosClicked = a;
+}
+else if(recosClicked.includes(a)){
+  recosClicked = recosClicked;
+}
+else{
+  recosClicked = a + '_' + recosClicked;
+}
+createCookie('reco_clicked', recosClicked, 365); 
+  },
+  "variables": {},
+  "pages": []
+},
+"C4": {
+  "name": "3Purchase Check",
+  "masks": {
+  "include" : [
+    "*/payment/*/success*",
+    "*checkout/*/complete*"
+  ],
+  "exclude" : [
+  ]
+},
+  "css": "",
+  "html": "",
+  "js": function (info, data) {
+  var a = JSON.parse(document.querySelector( "script[data-drupal-selector*='drupal-settings-json']" ).innerText);
+a = a.selfservice.subscriptionId;
+
+var recoCookie = getCookie('reco_clicked');
+
+if(recoCookie.includes(a)){
+  console.log('User bought a reco');
+  infi.push('data',{
+    'ora.bought_reco': 'true'
+  });
+  removeCookie('reco_clicked');
+}
+  },
+  "variables": {},
+  "pages": []
+},
+"c1": {
+  "name": "Personalized_Variant",
+  "masks": {
+  "include" : [
+    "https://play.mtn.ng/*",
+    "https://playpreprod.mtn.ng/*"
+  ],
+  "exclude" : [
+  ]
+},
+  "css": "#pebc6f521-bc2d-46f2-ac4e-8c4a8da90d88_c1.carousel_pers {\n  width: {{it.variables.containerWidth.value}};\n  height: {{it.variables.containerHeight.value}};\n  padding: {{it.variables.containerPadding.value}};\n  border: {{it.variables.containerBorder.value}};\n  border-radius: {{it.variables.containerBorderRadius.value}};\n  background: {{it.variables.containerBackgroundColor.value}};\n  overflow: hidden;\n}\n \n#pebc6f521-bc2d-46f2-ac4e-8c4a8da90d88_c1_items {\n  display: flex;\n  overflow-x: scroll;\n  scroll-snap-type: x mandatory;\n  padding: {{it.variables.containerItemsBoxPadding.value}};\n}\n \n \n#pebc6f521-bc2d-46f2-ac4e-8c4a8da90d88_c1_title {\n  align-self: normal;\n  color: {{it.variables.titleColor.value}};\n  font-family: inherit;\n  font-weight: {{it.variables.titleFontWeight.value}};\n  font-size: {{it.variables.titleFontSize.value}};\n  line-height: {{it.variables.titleLineHeight.value}};\n  text-align: {{it.variables.titleAlign.value}};\n  padding: {{it.variables.titlePadding.value}};\n  margin: 0;\n}\n  \n#pebc6f521-bc2d-46f2-ac4e-8c4a8da90d88_c1 .carousel-item_pers {\n  flex: 0 0 auto;\n  overflow: hidden;\n  width: {{it.variables.itemWidth.value}};\n  padding: {{it.variables.itemPadding.value}};\n  border: {{it.variables.itemBorder.value}};\n  border-radius: {{it.variables.itemBorderRadius.value}};\n  background: {{it.variables.itemBackgroundColor.value}};\n  margin-left: {{it.variables.itemMarging.value}};\n  scroll-snap-align: start;\n}\n  \n#pebc6f521-bc2d-46f2-ac4e-8c4a8da90d88_c1 .carousel-item_pers img {\n  width: {{it.variables.imageWidth.value}};\n  height: {{it.variables.imageHeight.value}};\n  background-size: {{it.variables.imageBackgroundSize.value}};\n  background-position: {{it.variables.imageBackgroundPosition.value}};\n  padding: {{it.variables.imagePadding.value}};\n}\n  \n#pebc6f521-bc2d-46f2-ac4e-8c4a8da90d88_c1 .carousel-item_pers a {\n  display: block;\n  color: {{it.variables.itemLinkColor.value}};\n  font-family: inherit;\n  font-weight: {{it.variables.itemLinkFontWeight.value}};\n  font-size: {{it.variables.itemLinkFontSize.value}};\n  line-height: {{it.variables.itemLinkLineHeight.value}};\n  text-decoration: {{it.variables.itemLinkDecoration.value}};\n}\n \n#pebc6f521-bc2d-46f2-ac4e-8c4a8da90d88_c1 .carousel-item_pers a .name_pers {\n \n  padding: {{it.variables.itemLinkPadding.value}};\n}\n \n#pebc6f521-bc2d-46f2-ac4e-8c4a8da90d88_c1 .carousel-item_pers .price_pers {\n  color: {{it.variables.itemPriceColor.value}};\n  font-family: inherit;\n  font-weight: {{it.variables.itemPriceFontWeight.value}};\n  font-size: {{it.variables.itemPriceFontSize.value}};\n  line-height: {{it.variables.itemPriceLineHeight.value}};\n  text-decoration: {{it.variables.itemPriceDecoration.value}};\n  padding: {{it.variables.itemPricePadding.value}};\n}\n \n#pebc6f521-bc2d-46f2-ac4e-8c4a8da90d88_c1 .carousel-item_pers .price_pers .old_pers {\n  color: {{it.variables.itemOldPriceColor.value}};\n  font-family: inherit;\n  font-weight: {{it.variables.itemOldPriceFontWeight.value}};\n  font-size: {{it.variables.itemOldPriceFontSize.value}};\n  line-height: {{it.variables.itemOldPriceLineHeight.value}};\n  text-decoration: {{it.variables.itemOldPriceDecoration.value}};\n  padding: {{it.variables.itemOldPricePadding.value}};\n}\n#pebc6f521-bc2d-46f2-ac4e-8c4a8da90d88_c1 .carousel-item_pers .price_pers .new_pers {\n  color: {{it.variables.itemNewPriceColor.value}};\n  font-family: inherit;\n  font-weight: {{it.variables.itemNewPriceFontWeight.value}};\n  font-size: {{it.variables.itemNewPriceFontSize.value}};\n  line-height: {{it.variables.itemNewPriceLineHeight.value}};\n  text-decoration: {{it.variables.itemNewPriceDecoration.value}};\n  padding: {{it.variables.itemNewPricePadding.value}};\n}\n\n.price_pers{\n  display: none !important;\n}\n\n.carousel_pers{\n  display: none !important;\n}",
+  "html": "<div id=\"pebc6f521-bc2d-46f2-ac4e-8c4a8da90d88_c1\" class=\"carousel_pers\">\n  <h2 id =\"pebc6f521-bc2d-46f2-ac4e-8c4a8da90d88_c1_title\"> {{it.variables.titleText.value}} </h2>\n  <div id=\"pebc6f521-bc2d-46f2-ac4e-8c4a8da90d88_c1_items\">\n      <!-- Carousel items will be dynamically generated here -->\n  \n      <!-- The below content is for preview only and will be replaced by actual recommendations.-->\n      <!-- Check generateCarouselItems() method in JS tab to see a template for items which is used on a web page  -->\n      <div class=\"carousel-item_pers\">\n        <a recsku=\"preview\" href=\"/\" target=\"_blank\">\n          <img  alt=\"Product Name\" src=\"https://oceintegration-oce0004.cec.ocp.oraclecloud.com/content/published/api/v1.1/assets/CONT76BDC83BFA9B4C54823AA3431643015B/native/Product_preview_image_1.png?channelToken=29497718d4964879a23b0c49895d8cfa\" />\n          <div class=\"name_pers\">Product Name</div>\n        </a>\n        <div class=\"price_pers\">Price</div>\n      </div>\n      <div class=\"carousel-item_pers\">\n        <a recsku=\"preview\" href=\"/\" target=\"_blank\">\n          <img  alt=\"Product Name\" src=\"https://oceintegration-oce0004.cec.ocp.oraclecloud.com/content/published/api/v1.1/assets/CONTA0CF4D3833604508BE302FDEE2EC267F/native/Product_preview_image_2.png?channelToken=29497718d4964879a23b0c49895d8cfa\" />\n          <div class=\"name_pers\">Product Name</div>\n        </a>\n        <div class=\"price_pers\"><span class=\"old_pers\">Old price</span> <span class=\"new_pers\">New price</span></div>\n      </div>\n      <div class=\"carousel-item_pers\">\n        <a recsku=\"preview\" href=\"/\" target=\"_blank\">\n          <img  alt=\"Product Name\" src=\"https://oceintegration-oce0004.cec.ocp.oraclecloud.com/content/published/api/v1.1/assets/CONTAFBFC4AF15F44C02B8D311DCC2524122/native/Product_preview_image_3.png?channelToken=29497718d4964879a23b0c49895d8cfa\" />\n          <div class=\"name_pers\">Product Name</div>\n        </a>\n        <div class=\"price_pers\">Price</div>\n      </div>\n       \n  </div>\n</div>\n\n",
+  "js": function (info, data) {
+  if(document.querySelectorAll('.related_content').length > 0){
+
+// Put a recommendation service URL here. Recommendations service can be created and configured in Recommendations page
+let serviceURL = ORA.personalization.render("{{it.variables.serviceURL.value}}", data.model);
+ 
+// How many recommendations you need in your widget
+let recommendationsCount = parseInt(ORA.personalization.render("{{it.variables.recommendationsCount.value}}", data.model), 10); //50;
+ 
+// Show old and new price if "Sale Price" is lesser then regular "Price"
+let salePriceLogicEnabled = true;    //true;
+ 
+// CSS query selector to the page element where this carousel must be inserted
+let targetSelector = ORA.personalization.render("{{it.variables.targetSelector.value}}", data.model);   //'#slot-content';
+ 
+// Where to place the carousel relatively to the page element. Possible values: 'beforebegin', 'afterbegin', 'beforeend', 'afterend'
+let insertAdjacentType = ORA.personalization.render("{{it.variables.insertAdjacentType.value}}", data.model);   //'afterbegin';
+ 
+// Carousel wraper element ID. Change it to avoid clashes if you need to insert multiple carousels on the same page. You need to place the same value into the ID atribute of carousel element in HTML section
+let guid = ORA.personalization.render("pebc6f521-bc2d-46f2-ac4e-8c4a8da90d88_c1", data.model);   //'productCarousel';
+ 
+// Function to generate carousel items based on the JSON data. You can change itemHTML template to adjust the apperance of recommended items in the carousel
+function generateCarouselItems(recommendations) {
+  let carouselHTML = "";
+  let skuList = "";
+  
+  //my part
+  var b = recommendations;
+  console.log(b);
+  console.log('Recommended products: ' + b[0]['Name'] + ',' + b[1]['Name'] + ',' + b[2]['Name'] + ',' + b[3]['Name'] + ',' + b[4]['Name']);
+  var start;
+var anz = document.querySelectorAll('.swiper-slide').length;
+for(var i = 0; i < anz; i++){
+  if(document.querySelectorAll('.swiper-slide')[i].classList.contains('swiper-slide-active')){
+    start = i;
+    i = anz;
+  }
+}
+
+for(var j = 0; j < 5; j++){
+  document.querySelectorAll('.swiper-slide > div > a')[start + j].href = b[j]['Page URL'] + "?utmcampaign=reco";
+  document.querySelectorAll('.swiper-slide > div > a > div > img')[start + j].src = b[j]['Image URL'];
+  document.querySelectorAll('.swiper-slide > div > a > div > h6')[start + j].innerText = b[j]['Name']; 
+}
+
+for(let k = 0; k < anz; k++){
+  let c = k;
+  document.querySelectorAll('.swiper-slide > div > a')[c].addEventListener("click", function(){
+    infi.push('click',{
+        "ora.reco_clicked": "true",
+        "ora.reco_name": document.querySelectorAll('.swiper-slide > div > a > div > h6')[c].innerText
+      });
+  });
+}
+
+  //end of my part
+
+  for (let i = 0; i < recommendations.length; i++) {
+    let product = recommendations[i];
+    let itemHTML = (salePriceLogicEnabled && (product['Price'] > product['Sale Price'])) ?
+      // Sale Price template
+      `
+         
+        <div class="carousel-item_pers">
+          <a href="${product['Page URL']}" target="_blank" recsku="${product['Product ID']}">
+            <img src="${product['Image URL']}" alt="${product.Name}" />
+            <div class="name_pers">${product.Name}</div>
+            
+          </a>
+          <div class="price_pers"><span class="old_pers">${product['Formatted Price']} ${product['Formatted Currency']}</span> <span class="new_pers">${product['Formatted Sale Price']} ${product['Formatted Currency']}</span></div>
+        </div>
+         
+      ` :
+      // Price template
+      `
+         
+        <div class="carousel-item_pers">
+          <a href="${product['Page URL']}" target="_blank" recsku="${product['Product ID']}">
+            <img src="${product['Image URL']}" alt="${product.Name}" />
+            <div class="name_pers">${product.Name}</div>
+ 
+          </a>
+          <div class="price_pers">${product['Formatted Price']} ${product['Formatted Currency']}</div>
+        </div>
+         
+      `;
+    carouselHTML += itemHTML;
+    skuList +=  ";" + product['Product ID'];
+  }
+  trackRecommendation("recommendation_displayed", skuList.slice(1));
+    
+  return carouselHTML;
+}
+  
+// CSS query selector for tracking clicks on recommended items. You may need to update it if you change the above itemHTML template significantly
+let controls = {
+  itemClick: '.carousel-item_pers a'
+};
+  
+// Set it to true if you use one of "this-that" type of recommendations strategy. These strategies require a list of items as an input and provide recommendations based on this list. You will need to implement a logic for geting a list of products from a page.
+let useProductIdsList = true;
+
+var a = JSON.parse(document.querySelector( "script[data-drupal-selector*='drupal-settings-json']" ).innerText);
+a = a.selfservice.subscriptionId;
+//ORA.recommender.setProductIDs([a]);
+
+//General function
+window.when = function(condition, done){
+   var timer = setInterval(function(){
+      if(condition()){
+         clearInterval(timer);
+         done();
+      }
+   }, 100);
+}
+
+//To trigger
+when(function() { 
+  return typeof ORA.recommender.setProductIDs == "function"; 
+}, function(){
+  ORA.recommender.setProductIDs([a]);
+  console.log('This is the product ID from this page: ' + a);
+});
+
+
+
+// Call ORA.recommender.setProductIDs(["product1","product2","..."]) on your page to define a list of products for "this-that" recommendations. Or implement a custom logic of getting such product list in the promise below
+let getProductIdsListPromise = new Promise(function(resolve) {
+  if (!useProductIdsList) {
+    resolve(null);
+  } else {
+    if (ORA && ORA.recommender && ORA.recommender.getProductIDs && (typeof ORA.recommender.getProductIDs === "function")) {
+      ORA.recommender.getProductIDs()
+        .then((productIDs) => {
+          resolve(productIDs);
+        })
+        .catch(() => {
+          resolve(null);
+        });
+    }
+  }
+});
+  
+// Trackin a generic click
+function track(event) {
+  ORA.click({
+    data: {
+      'pers.acn': event,
+      'pers.cmp': info.campaign.name,
+      'pers.blk': info.block.name,
+      'pers.prd': info.isProduction
+    }
+  });
+}
+  
+// Trackin which of recommended item gets clicked
+function trackRecommendation(event, sku) {
+  ORA.click({
+    data: {
+      'wt.tx_e': event,
+      'wt.pn_sku': sku,
+      'pers.cmp': info.campaign.name,
+      'pers.blk': info.block.name,
+      'pers.prd': info.isProduction
+    }
+  });
+}
+  
+// ------ carousel rendering logic starts here
+  
+track('triggered');
+  
+start();
+  
+function start() {
+  if (['complete','interactive'].includes(document.readyState)) {
+    render();
+  } else {
+    document.addEventListener('DOMContentLoaded', render, { once : true });
+  }
+}
+  
+function widget() {
+  return document.querySelector(`#${guid}_items`);
+}
+  
+  
+function onclick(selector, handler) {
+  widget().querySelectorAll(selector).forEach(function(node) {
+    node.addEventListener('click', handler);
+  });
+}
+  
+function attachRecClicks(selector) {
+  widget().querySelectorAll(selector).forEach(function(node) {
+    let recsku = node.getAttribute("recsku");
+    if (recsku) {
+      node.addEventListener('click', () => {
+        trackRecommendation('recommendation_clicked', recsku)
+      });
+    }
+  });
+}
+  
+function attachEvents() {
+  onclick(controls.itemClick, () => {
+    track('clicked');
+  });
+  attachRecClicks(controls.itemClick);
+}
+  
+function render() {
+  let placeholder = document.querySelector(targetSelector);
+  if (placeholder) {
+    renderRecoCarousel(placeholder, serviceURL);
+  }
+}
+  
+function renderRecoCarousel(placeholder, endpoint) {
+    
+  let historyTypeMap = {
+    "P": "purchase",
+    "V": "view"
+  };
+    
+  getProductIdsListPromise.then((productIDs) => {
+      
+    // JSON data to be sent in the POST request
+    let postData = {
+      "history": getHistory(),
+      "count": recommendationsCount
+    };
+    if (productIDs) {
+      postData.productIdsList = productIDs;
+    }
+      
+    // Fetch JSON data from the API endpoint and generate carousel items
+    return fetchJSONData(endpoint, postData);
+      
+  }).then((recommendations) => {
+    if (recommendations.length) {
+      const carouselItems = generateCarouselItems(recommendations);
+      const css = ORA.personalization.render(data.css, data.model);
+      const html = ORA.personalization.render(data.html, data.model);
+      placeholder.insertAdjacentHTML(insertAdjacentType, `<style type="text/css">${css}</style>${html}`);
+ 
+      let productCarousel = widget();
+      productCarousel.innerHTML = ORA.personalization.render(carouselItems, data.model);
+      attachEvents();
+      track('displayed');
+    }
+  });
+    
+  function getHistory() {
+    let historyCompressed = ORA.recommender ? ORA.recommender.getHistory() : [];
+  
+    let history = (historyCompressed && historyCompressed.reduce) ? historyCompressed.reduce((result, item) => {
+      try {
+        let id_ = Object.keys(item)[0];
+        let type_ = Object.keys(item[id_])[0];
+        let timestamp_ = item[id_][type_].D;
+          
+        let productId = window.atob(id_);
+        let eventType = historyTypeMap[type_] || type_;
+        let eventDate = timestamp_ * 1000;
+  
+        result.push({
+            id: productId,
+            date: eventDate,
+            type: eventType       
+        });
+          
+        return result;
+          
+      } catch(error) {
+        return result;
+      }
+    }, []) : [];
+  
+    return history;
+  };
+  
+  // Function to fetch JSON data from the API endpoint
+  function fetchJSONData(url, data) {
+    return fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(data)
+    })
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        return data.recommendations;
+      })
+      .catch((error) => {});
+  }
+}
+
+}
+  },
+  "variables": {
+  "serviceURL": {
+    "name": "Service API URL",
+    "value": "https://eu.service.recommendations.ocs.oraclecloud.com/recommendations/api/v1/services/14o92w47",
+    "group": "Recommendations settings"
+  },
+  "recommendationsCount": {
+    "name": "Number of recommendations",
+    "value": "5",
+    "group": "Recommendations settings"
+  },
+  "targetSelector": {
+    "name": "Target element CSS selector",
+    "value": ".related_content",
+    "group": "Widget position"
+  },
+  "insertAdjacentType": {
+    "name": "beforebegin/afterbegin/beforeend/afterend",
+    "value": "beforebegin",
+    "group": "Widget position"
+  },
+  "containerWidth": {
+    "name": "Width",
+    "value": "auto",
+    "group": "Widget container"
+  },
+  "containerHeight": {
+    "name": "Height",
+    "value": "auto",
+    "group": "Widget container"
+  },
+  "containerBackgroundColor": {
+    "name": "Background color",
+    "value": "#ffffff",
+    "group": "Widget container"
+  },
+  "containerBorder": {
+    "name": "Border",
+    "value": "3px solid #16151380",
+    "group": "Widget container"
+  },
+  "containerBorderRadius": {
+    "name": "Border radius",
+    "value": "20px",
+    "group": "Widget container"
+  },
+  "containerPadding": {
+    "name": "Padding",
+    "value": "0px 26px 2px 26px",
+    "group": "Widget container"
+  },
+  "containerItemsBoxPadding": {
+    "name": "Carousel padding",
+    "value": "0px 0px 42px 0px",
+    "group": "Widget container"
+  },
+  "titleText": {
+    "name": "Text",
+    "value": "Recommended Items",
+    "group": "Title"
+  },
+  "titleColor": {
+    "name": "Color",
+    "value": "#47423E",
+    "group": "Title"
+  },
+  "titleFontSize": {
+    "name": "Font size",
+    "value": "28px",
+    "group": "Title"
+  },
+  "titleFontWeight": {
+    "name": "Font weight",
+    "value": "bold",
+    "group": "Title"
+  },
+  "titleLineHeight": {
+    "name": "Line height",
+    "value": "36px",
+    "group": "Title"
+  },
+  "titleAlign": {
+    "name": "Align",
+    "value": "left",
+    "group": "Title"
+  },
+  "titlePadding": {
+    "name": "Padding",
+    "value": "40px 0px 20px 40px",
+    "group": "Title"
+  },
+  "itemWidth": {
+    "name": "Width",
+    "value": "332px",
+    "group": "Item card"
+  },
+  "itemBackgroundColor": {
+    "name": "Background color",
+    "value": "#D4CFCA",
+    "group": "Item card"
+  },
+  "itemBorder": {
+    "name": "Border",
+    "value": "2px solid #47423E",
+    "group": "Item card"
+  },
+  "itemBorderRadius": {
+    "name": "Border radius",
+    "value": "10px",
+    "group": "Item card"
+  },
+  "itemPadding": {
+    "name": "Padding",
+    "value": "0px 0px 22px 0px",
+    "group": "Item card"
+  },
+  "itemMarging": {
+    "name": "Distance between items",
+    "value": "40px",
+    "group": "Item card"
+  },
+  "imageWidth": {
+    "name": "Maximum width",
+    "value": "100%",
+    "group": "Item image"
+  },
+  "imageHeight": {
+    "name": "Image height",
+    "value": "auto",
+    "group": "Item image"
+  },
+  "imageBackgroundSize": {
+    "name": "Background size",
+    "value": "cover",
+    "group": "Item image"
+  },
+  "imageBackgroundPosition": {
+    "name": "Background position",
+    "value": "50% 0%",
+    "group": "Item image"
+  },
+  "imagePadding": {
+    "name": "Padding",
+    "value": "0px 0px 0px 0px",
+    "group": "Item image"
+  },
+  "itemLinkColor": {
+    "name": "Color",
+    "value": "#47423E",
+    "group": "Item link"
+  },
+  "itemLinkFontSize": {
+    "name": "Font size",
+    "value": "24px",
+    "group": "Item link"
+  },
+  "itemLinkFontWeight": {
+    "name": "Font weight",
+    "value": "700",
+    "group": "Item link"
+  },
+  "itemLinkLineHeight": {
+    "name": "Line height",
+    "value": "32px",
+    "group": "Item link"
+  },
+  "itemLinkDecoration": {
+    "name": "Decoration",
+    "value": "none",
+    "group": "Item link"
+  },
+  "itemLinkPadding": {
+    "name": "Padding",
+    "value": "13px 0px 0px 33px",
+    "group": "Item link"
+  },
+  "itemPriceColor": {
+    "name": "Color",
+    "value": "#47423E",
+    "group": "Item price"
+  },
+  "itemPriceFontSize": {
+    "name": "Font size",
+    "value": "16px",
+    "group": "Item price"
+  },
+  "itemPriceFontWeight": {
+    "name": "Font weight",
+    "value": "700",
+    "group": "Item price"
+  },
+  "itemPriceLineHeight": {
+    "name": "Line height",
+    "value": "20px",
+    "group": "Item price"
+  },
+  "itemPriceDecoration": {
+    "name": "Decoration",
+    "value": "none",
+    "group": "Item price"
+  },
+  "itemPricePadding": {
+    "name": "Padding",
+    "value": "0px 33px 0px 33px",
+    "group": "Item price"
+  },
+  "itemOldPriceColor": {
+    "name": "Color",
+    "value": "#16151380",
+    "group": "Item old price"
+  },
+  "itemOldPriceFontSize": {
+    "name": "Font size",
+    "value": "16px",
+    "group": "Item old price"
+  },
+  "itemOldPriceFontWeight": {
+    "name": "Font weight",
+    "value": "700",
+    "group": "Item old price"
+  },
+  "itemOldPriceLineHeight": {
+    "name": "Line height",
+    "value": "20px",
+    "group": "Item old price"
+  },
+  "itemOldPriceDecoration": {
+    "name": "Decoration",
+    "value": "line-through",
+    "group": "Item old price"
+  },
+  "itemOldPricePadding": {
+    "name": "Padding",
+    "value": "0px 0px 0px 0px",
+    "group": "Item old price"
+  },
+  "itemNewPriceColor": {
+    "name": "Color",
+    "value": "#ee4848",
+    "group": "Item new price"
+  },
+  "itemNewPriceFontSize": {
+    "name": "Font size",
+    "value": "16px",
+    "group": "Item new price"
+  },
+  "itemNewPriceFontWeight": {
+    "name": "Font weight",
+    "value": "700",
+    "group": "Item new price"
+  },
+  "itemNewPriceLineHeight": {
+    "name": "Line height",
+    "value": "20px",
+    "group": "Item new price"
+  },
+  "itemNewPriceDecoration": {
+    "name": "Decoration",
+    "value": "none",
+    "group": "Item new price"
+  },
+  "itemNewPricePadding": {
+    "name": "Padding",
+    "value": "0px 0px 0px 0px",
+    "group": "Item new price"
+  }
+},
+  "pages": []
+},
+"C2": {
+  "name": "1Cookie Function",
+  "masks": {
+  "include" : [
+    "*"
+  ],
+  "exclude" : [
+  ]
+},
+  "css": "",
+  "html": "",
+  "js": function (info, data) {
+  //Helper Function to get and set Cookies
+window.getCookie = function(cookieName) {
+  let cookie = {};
+  document.cookie.split(';').forEach(function(el) {
+    let [key,value] = el.split('=');
+    cookie[key.trim()] = value;
+  })
+  return cookie[cookieName];
+}
+
+window.createCookie = function(name, value, days) {
+    var date, expires;
+    if (days) {
+        date = new Date();
+        date.setDate(date.getDate()+days);
+        expires = "; expires="+date.toUTCString();
+    } else {
+        expires = "";
+    }
+    document.cookie = name+"="+value+expires+"; path=/";
+}
+
+window.removeCookie = function(name) {
+    var date, expires;
+    date = new Date();
+    date.setDate(date.getDate()-100000);
+    expires = "; expires="+date.toUTCString();
+    document.cookie = name+"="+""+expires+"; path=/";
+}
+  },
+  "variables": {},
+  "pages": []
+}
+  }
+}
+  },
+  "pages": {
+    
+  }
+});

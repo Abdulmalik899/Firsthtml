@@ -1,0 +1,190 @@
+body{
+    background-color: black;
+    margin: 0px;
+    padding: 0px;
+    color: white;
+} 
+nav{
+    background-image: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0, rgba(0, 0, 0, 0) 60%, rgba(0, 0, 0, 0.8) 100%), url(../images/netflix.jpg);
+   /* margin-bottom: 10px; */
+   background-size: auto;
+   background-attachment: scroll;
+   height: 100vh;
+   background-position: center;
+
+}
+.section1{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 20px 150px;
+}
+.button{
+    border-style: solid;
+    transition: inherit;
+    background-color: red;
+    border-color: red;
+    align-content: center;
+    border-radius: 12px;
+    width: 65px;
+    height: 32px;
+    justify-items: center;
+}
+.sign{
+    text-decoration: none;
+    box-sizing: border-box;
+    color: white;
+    padding-left: 8px;
+}
+.section2{
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 190px;
+    margin-top: 0%;
+}
+
+.Heading1{
+    font-size: 49px;
+    font-weight: 700;
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+
+}
+.ayato{
+    margin: 0;
+    font-size: 25px;
+}
+.window{
+    font-size: 25px;
+}
+input{
+    background: rgba(255, 255, 255, 0);
+    width: 285px;
+    height: 39px;
+    color: rgba(255, 255, 255, 0.1);
+    border-radius: 7px;
+
+}
+.branch3{
+    display: flex;
+    justify-content: center;
+    column-gap: 14px;
+    
+}
+.getstarted{
+    color: white;
+    border-style: solid;
+    background: red;
+    width: 175px;
+    font-weight: 900;
+    font-size: 20px;
+    border-radius: 7px;
+    border-color: red;
+}
+.section3{
+    color: white;
+    display: flex;
+     justify-items: space-between;
+     align-items: center;
+    box-sizing: border-box;
+    
+}
+h2{
+    font-size: xx-large;
+}
+.Smart{
+    font-size: 25px;
+}
+.container2{
+    border-top: 7px solid #232323;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    
+}
+.sector2{
+    display: flex;
+   
+    align-items: center;
+    flex-direction: row-reverse;
+    width: 80%;
+    margin: 0 auto;
+    
+    
+}
+.sector2-child{
+    width:50%;
+}
+
+
+
+/* /* .image{
+    width: 455px;
+    display: flex;
+    align-self: center;
+     */
+   
+.container3{
+    border-top: 7px solid #232323;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.sector3{
+    display: flex;
+    align-items: center;
+    width: 80%;
+    margin: 0 auto;
+    justify-content: space-between;
+    border: 2px solid red;
+    
+}
+.sector3-child{
+    width: 50%;
+    border: 2px solid blue;
+    
+   
+}
+.container4{
+    border-top: 7px solid #232323;
+    
+}
+.sector4{
+    display: flex;
+    flex-direction: row;
+    width: 80%;
+    margin: 0 auto;    
+   
+}
+.sector4-child{
+    width: 40%;
+}
+.sector2-child-img, .sector3-child-img{
+    width: 50%;
+    margin: 50px 0px;
+}
+.container4{
+    padding: 70px 0;
+}
+.shows{
+    font-size: 48px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.watch{
+    font-size: 24px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.Save{
+    font-size: 24px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.offline{
+    font-size: 48px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.img{
+    width: 100%;
+    height: auto;
+}

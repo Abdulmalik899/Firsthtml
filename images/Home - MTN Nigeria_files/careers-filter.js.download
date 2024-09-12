@@ -1,0 +1,105 @@
+(function ($){
+
+    if (typeof careerSelectorVars !== 'undefined') {
+
+        if(careerSelectorVars.careerCurrentTerm){
+           $('.department-selector').val(careerSelectorVars.careerCurrentTerm);
+        } else{
+           $('.department-selector').val('all');
+        };
+  
+        $('.department-selector').on('change',function(e){
+  
+           let departmentSlug =  $( '.department-selector' ).val();
+           if(departmentSlug == 'all'){
+           window.location.replace(careerSelectorVars.careerArchiveUrl);
+           }
+           else{
+           window.location.replace(careerSelectorVars.careerTaxonomyArchive + departmentSlug+ "/");
+           }
+        });
+     }
+
+     $('.single-card').addClass('region-filter__show');
+     $('.career-region-selector').on('change',function(e){
+   
+        let selectedRegion =  $('.career-region-selector').val();
+        
+     if(selectedRegion == 'allregions'){
+        $('.single-career').show(100).addClass('region-filter__show');
+     }else{
+        $('.single-career').hide(100).removeClass('region-filter__show');
+        $('.single-career[data-region="'+selectedRegion+'"]').show(100).addClass('region-filter__show');
+        $('.career-town-selector').val('alltowncity');
+     }
+     });
+
+     $('.single-card').addClass('jobtown-filter__show');
+     $('.career-town-selector').on('change',function(e){
+       // $('.store-search-text').val('');
+        let selectedJobtown =  $('.career-town-selector').val();
+   
+     if(selectedJobtown == 'alltowncity'){
+        $('.single-career').show(100).addClass('jobtown-filter__show');
+     }else{
+        $('.single-career').hide(100).removeClass('jobtown-filter__show');
+        $('.single-career[data-jobtown="'+selectedJobtown+'"]').show(100).addClass('jobtown-filter__show');
+     }
+     });
+
+     if((document.getElementById("file-upload-box"))){
+
+         document.getElementById("file-upload-box").onchange = function(){
+         document.getElementById("file-name").textContent = this.files[0].name;
+         document.getElementById("file-name").classList.remove('hidden');
+       }
+
+     }
+
+   
+
+
+   if((document.getElementById('career-footer-share'))){
+      document.getElementById('footer-share-tooltip').classList.add("tooltip-hide");  
+      let tooltipClicked = false;
+
+      document.getElementById('career-footer-share').onclick = function () {
+      if(tooltipClicked==false){
+      tooltipClicked=true;
+      document.getElementById('footer-share-tooltip').classList.remove("tooltip-hide");  
+      }else{
+         tooltipClicked=false;
+         document.getElementById('footer-share-tooltip').classList.add("tooltip-hide");  
+      }
+      
+      }
+   }
+
+   if((document.getElementById('job-disclaimer'))){
+      document.getElementById('job-disclaimer').checked == false;
+      document.getElementById('job-disclaimer').classList.remove("disclaimer-checked");
+      document.getElementById('apply-footer-btn').classList.add("link-disabled");
+      document.getElementById('job-disclaimer').classList.add("disclaimer-unchecked");
+
+      document.getElementById('job-disclaimer').onclick = function () {
+         if(document.getElementById('job-disclaimer').checked == true){
+            document.getElementById('job-disclaimer').checked == true;
+            document.getElementById('apply-footer-btn').classList.remove("link-disabled");
+            document.getElementById('job-disclaimer').classList.remove("disclaimer-unchecked");
+            document.getElementById('job-disclaimer').classList.add("disclaimer-checked");
+         
+         }else{
+       
+
+            document.getElementById('job-disclaimer').checked == false;
+            document.getElementById('apply-footer-btn').classList.add("link-disabled");
+            document.getElementById('job-disclaimer').classList.remove("disclaimer-checked");
+            document.getElementById('job-disclaimer').classList.add("disclaimer-unchecked");
+         }
+      
+      }
+
+   }
+
+
+})(jQuery);

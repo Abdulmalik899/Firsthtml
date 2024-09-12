@@ -1,0 +1,125 @@
+(function ($) {
+
+
+  var menuItems = document.querySelector(".menu-items");
+  var expandBtn = document.querySelectorAll(".expand-btn");
+  var megaBlock = document.querySelector(".block-mega");
+  var hideexpansion = document.querySelector('.hide-header-expansion');
+  var marker = document.querySelector("#marker");
+  var dropDownSecondaryParent = document.querySelectorAll('.inner-parent');
+  var items = document.querySelectorAll('.parent-item');
+  var bottomUnderline = document.querySelector('.gray-underline');
+  var menuToggle = document.querySelector('.mobile-toggle');
+  var headerContainer = document.querySelector('.header-container');
+  var closeMegaMenu = document.querySelectorAll('.mega-close-button');
+  var parentDropDown = document.querySelectorAll('.parent-dropdown');
+  var mobileTopHeaderDropDown = document.querySelector('.mobile-dropdowns');
+  var dropDownLabel = document.querySelector('.droppdowns-labels');
+  var breadcrumb = [];
+
+  // Back button Mobile version
+  $('.back-button').click(MobileBackButtonFunc());
+
+  function MobileBackButtonFunc() {
+	if (!breadcrumb || breadcrumb.length === 0) return;
+
+	if (breadcrumb.length === 1) {
+	  breadcrumb.pop().nextElementSibling.classList.remove('show');
+	  mobileTopHeaderDropDown.classList.remove('show');
+	} else {
+	  breadcrumb.pop().nextElementSibling.classList.remove('show');
+	  dropDownLabel.textContent = breadcrumb[breadcrumb.length - 1].dataset.backLabel;
+	}
+  }
+
+  // This to add a hover class to the first level children a tags
+  for (var i = 0; i < dropDownSecondaryParent.length; i++) {
+	dropDownSecondaryParent[i].addEventListener('mouseover', hoverClassFun);
+  }
+
+  function hoverClassFun() {
+	(document.querySelector('.child-hover-class')) ? document.querySelector('.child-hover-class').classList.remove('child-hover-class'): '';
+	this.classList.add('child-hover-class');
+  }
+
+  // humburger toggle
+  for (var i = 0; i < expandBtn.length; i++) {
+	expandBtn[i].addEventListener('mouseover', function() {
+	  megaBlock.classList.add('expand');
+	  hideexpansion.classList.add('show');
+	});
+  }
+
+  // The events that hide the mega menu Block
+  hideexpansion.addEventListener('mouseover', hideHeadingsContainer);
+  for (var i = 0; i < closeMegaMenu.length; i++) {
+	closeMegaMenu[i].addEventListener('click', hideHeadingsContainer);
+  }
+
+  // This function that hides the mega menu block
+  function hideHeadingsContainer() {
+	this.classList.remove('show');
+	megaBlock.classList.remove('expand');
+	marker.classList.add('hide');
+	bottomUnderline.classList.remove('show');
+	(document.querySelector('.child-hover-class')) ? document.querySelector('.child-hover-class').classList.remove('child-hover-class'): '';
+  }
+
+  // Makrker Custom Border bottom Menu
+  function indicator(e) {
+	marker.style.left = e.offsetLeft + "px";
+	marker.style.width = e.offsetWidth + "px";
+  }
+
+  items.forEach(function(link) {
+	link.addEventListener("mouseover", function(e) {
+	  marker.classList.remove('hide');
+	  indicator(e.target);
+	})
+  });
+
+  for (var i = 0; i < parentDropDown.length; i++) {
+	parentDropDown[i].addEventListener('mouseover', showMegaMenuFromParentMenu);
+  }
+
+  function showMegaMenuFromParentMenu() {
+	bottomUnderline.classList.add('show');
+  }
+
+  // Toggle the menu on mobile version
+  menuToggle.addEventListener('click', toggleMenuFunction);
+
+  // this  function expands the mega menu On Mobile verion
+  function toggleMenuFunction() {
+	var isOpen = this.classList.contains('active');
+	headerContainer.classList.toggle('open');
+	megaBlock.classList.toggle('expand');
+	this.classList.toggle('active');
+
+	if (isOpen) {
+	  var menuShow = document.querySelectorAll('menu-right.show, .dropdown-menu.show');
+	  mobileTopHeaderDropDown.classList.remove('show');
+
+	  for (var i = 0; i < menuShow.length; i++) {
+		menuShow[i].classList.remove('show');
+	  }
+	}
+  };
+
+  // Display the dropdown menu on mobile version
+  for (var i = 0; i < parentDropDown.length; i++) {
+	parentDropDown[i].addEventListener('click', function() {
+	  this.nextElementSibling.classList.add('show');
+	  mobileTopHeaderDropDown.classList.add('show');
+	  dropDownLabel.innerHTML = this.dataset.backLabel;
+	  breadcrumb.push(this);
+	});
+  }
+
+  document.querySelector('.header-logo').addEventListener('mouseover', function() {
+	var isOpen = megaBlock.classList.contains('expand');
+	if (isOpen) {
+	  megaBlock.classList.remove('expand');
+	}
+  })
+})(jQuery);
